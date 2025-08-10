@@ -98,7 +98,7 @@ impl<T> Collection<T> for LinkedList<T> {
     }
 
     // TODO implement remove specific element
-    fn remove(&mut self, value: T) -> bool {
+    fn remove(&mut self, _value: T) -> bool {
         return false;
     }
 

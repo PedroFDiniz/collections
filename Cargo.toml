@@ -1,6 +1,7 @@
 [package]
 name = "collections"
+authors = ["Pedro Falcão"]
 version = "0.1.0"
 edition = "2021"
-
-
+description = "An implementation of basic data structures and algorithms. Just for exercising my personal abilities with the language."
+license = "CC BY"
