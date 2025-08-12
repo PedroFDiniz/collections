@@ -24,7 +24,7 @@ mod tests {
     }
 
     #[test]
-    fn adds_more_than_one_element_to_linked_list() {
+    fn populates_linked_list() {
         let mut list: LinkedList<i32> = LinkedList::new();
         for number in 0..=10 {
             list.push(number);
@@ -115,5 +115,58 @@ mod tests {
         assert!(list.contains(&ten));
         assert!(list.contains(&4));
         assert!(list.contains(&6));
+    }
+
+    #[test]
+    fn remove_item_that_doesnt_exist_in_linked_list() {
+        let mut list: LinkedList<i32> = LinkedList::new();
+        for number in 0..=10 { list.push(number); }
+        let eleven = 11i32;
+
+        assert_eq!(list.size(), 11);
+        assert!(!list.remove(&eleven));
+        assert_eq!(list.size(), 11);
+    }
+
+    #[test]
+    fn remove_item_from_linked_list_at_index() {
+        let mut list: LinkedList<i32> = LinkedList::new();
+        for number in 0..=10 { list.push(number); }
+        let six = 6i32;
+        let seven = 7i32;
+
+        assert_eq!(list.size(), 11);
+        assert_eq!(list.remove_at(6), Some(six));
+        assert_eq!(list.size(), 10);
+        assert_eq!(list.get(6), Some(&seven));
+    }
+
+    #[test]
+    fn remove_item_at_index_zero_on_linked_list() {
+        let mut list: LinkedList<i32> = LinkedList::new();
+        for number in 0..=10 { list.push(number); }
+        let zero = 0usize;
+
+        assert_eq!(list.size(), 11);
+        assert_eq!(list.remove_at(zero), Some(0));
+        assert_eq!(list.size(), 10);
+        assert_eq!(list.get(0), Some(&1))
+    }
+
+    #[test]
+    fn remove_item_at_index_from_empty_linked_list() {
+        let mut list: LinkedList<i32> = LinkedList::new();
+        assert!(list.is_empty());
+        assert_eq!(list.remove_at(0), None);
+    }
+
+    #[test]
+    fn remove_item_at_index_higher_than_linked_list_size() {
+        let mut list: LinkedList<i32> = LinkedList::new();
+        for number in 0..=10 { list.push(number); }
+
+        assert_eq!(list.remove_at(12), None);
+        assert_eq!(list.remove_at(11), None);
+        assert_eq!(list.remove_at(10), Some(10));
     }
 }

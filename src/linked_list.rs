@@ -115,6 +115,28 @@ impl<T> LinkedList<T> {
         } return false;
     }
 
+    pub fn remove_at(&mut self, index: usize) -> Option<T> where T: PartialEq {
+        if index >= self.size || self.size == 0 { return None; }
+        if index == 0 {
+            let removed = self.head.take().unwrap();
+            self.head = removed.next;
+            self.size -= 1;
+            return Some(removed.value);
+        }
+        let mut counter: usize = 1;
+        let mut current_node = self.head.as_mut();
+        while let Some(node) = current_node {
+            if node.next.is_none() { break; }
+            if counter == index {
+                let removed = node.next.take().unwrap();
+                node.next = removed.next;
+                self.size -= 1;
+                return Some(removed.value);
+            } current_node = node.next.as_mut();
+            counter += 1;
+        } return None;
+    }
+
     pub fn size(&self) -> usize {
         return self.size;
     }
